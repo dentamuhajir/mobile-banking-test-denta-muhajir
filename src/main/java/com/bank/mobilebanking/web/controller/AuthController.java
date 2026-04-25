@@ -2,6 +2,8 @@ package com.bank.mobilebanking.web.controller;
 
 
 import com.bank.mobilebanking.application.service.AuthService;
+import com.bank.mobilebanking.web.dto.LoginResponse;
+import com.bank.mobilebanking.web.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,16 +20,18 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public Map<String, Object> login(@RequestBody Map<String, String> req) {
+    public ApiResponse<LoginResponse> login(@RequestBody Map<String, String> req) {
 
         String token = authService.login(
                 req.get("username"),
                 req.get("password")
         );
 
-        return Map.of(
-                "accessToken", token,
-                "tokenType", "Bearer"
-        );
+        LoginResponse response = LoginResponse.builder()
+                .accessToken(token)
+                .tokenType("Bearer")
+                .build();
+
+        return ApiResponse.success(response);
     }
 }
