@@ -1,9 +1,11 @@
 package com.bank.mobilebanking.application.service;
 
+import com.bank.mobilebanking.domain.exception.BusinessException;
 import com.bank.mobilebanking.security.AppUserDetails;
 import com.bank.mobilebanking.security.AppUserDetailsService;
 import com.bank.mobilebanking.security.JwtService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,11 @@ public class AuthService {
                 userDetailsService.loadUserByUsername(username);
 
         if (!encoder.matches(password, userDetails.getPassword())) {
-            throw new RuntimeException("INVALID_CREDENTIALS");
+            throw new BusinessException(
+                    "INVALID_CREDENTIALS",
+                    "Invalid username or password",
+                    HttpStatus.UNAUTHORIZED
+            );
         }
 
         return jwtService.generateToken(userDetails);
