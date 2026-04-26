@@ -160,14 +160,6 @@ GET /api/transactions/{id}
 
 <img width="1536" height="1024" alt="ChatGPT Image Apr 26, 2026, 08_59_20 PM" src="https://github.com/user-attachments/assets/fa568c53-ca99-4436-b005-02f7f9984672" />
 
-
-Recommended screenshots:
-
-* Login Page
-* Dashboard (Balance)
-* Transfer Modal
-* Transaction History
-
 ---
 
 ## 📂 Project Structure
