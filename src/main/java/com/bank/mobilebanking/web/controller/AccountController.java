@@ -25,6 +25,7 @@ public class AccountController {
 
         BalanceResponse response = BalanceResponse.builder()
                 .accountNumber(account.getAccountNumber())
+                .username(userDetails.getUsername())
                 .balance(account.getBalance())
                 .currency("IDR")
                 .build();
